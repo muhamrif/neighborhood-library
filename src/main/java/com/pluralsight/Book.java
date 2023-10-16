@@ -59,4 +59,22 @@ public class Book {
     public void setCheckedOutTo(String checkedOutTo) {
         this.checkedOutTo = checkedOutTo;
     }
+
+    public void checkOut(String checkedOutTo){
+        if (isCheckedOut==true){
+            System.out.println("someone else has this book, cannot checkout");
+        }else{
+            this.checkedOutTo=checkedOutTo;
+            isCheckedOut = true;
+            System.out.println("you have checked out the book!");
+        }
+    }
+
+    public void checkIn(){
+        checkedOutTo = "";
+        isCheckedOut = false;
+        System.out.println("you have successfully checked in this book");
+    }
+
+
 }
