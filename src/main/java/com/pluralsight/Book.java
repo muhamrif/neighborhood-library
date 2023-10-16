@@ -11,14 +11,16 @@ public class Book {
 
     private String checkedOutTo;
 
-    public Book(int id, String isbn, String title, boolean isCheckedOut, String checkedOutTo) {
+    private int availableIn;
+
+    public Book(int id, String isbn, String title, boolean isCheckedOut, String checkedOutTo, int availableIn) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
         this.isCheckedOut = isCheckedOut;
         this.checkedOutTo = checkedOutTo;
+        this.availableIn = availableIn;
     }
-
 
     public int getId() {
         return id;
@@ -60,6 +62,14 @@ public class Book {
         this.checkedOutTo = checkedOutTo;
     }
 
+    public int getAvailableIn() {
+        return availableIn;
+    }
+
+    public void setAvailableIn(int borrowLimit) {
+        this.availableIn = borrowLimit;
+    }
+
     public void checkOut(String checkedOutTo){
         if (isCheckedOut==true){
             System.out.println("someone else has this book, cannot checkout");
@@ -76,5 +86,15 @@ public class Book {
         System.out.println("you have successfully checked in this book");
     }
 
-
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", isbn='" + isbn + '\'' +
+                ", title='" + title + '\'' +
+                ", isCheckedOut=" + isCheckedOut +
+                ", checkedOutTo='" + checkedOutTo + '\'' +
+                ", availableIn=" + availableIn +
+                '}';
+    }
 }
