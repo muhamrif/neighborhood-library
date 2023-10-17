@@ -1,15 +1,23 @@
 package com.pluralsight;
 
 
+import java.util.Scanner;
 
 public class Screen {
 
     private static Book[] Books = new Book[20];
     private static int BookInventory = 20;
     public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
         addInventory();
 
         System.out.println("Welcome to Muhamrif Library!");
+        input.nextLine();
+
+        System.out.println("please select opt");
+
+
         printAllBooks();
 
 
@@ -19,11 +27,35 @@ public class Screen {
 
 
     public static void printAllBooks(){
-        System.out.println(Books[0].toString());
+
+        System.out.println("These are all the books in Muhamrif Library:");
+        for (int i=0;i<Books.length;i++){
+                int id = Books[i].getId();
+                String isbn = Books[i].getIsbn();
+                String title = Books[i].getTitle();
+                int availDays = Books[i].getAvailableIn();
+                String available= Books[i].getAvailableIn() == 0? "You can checkout this book for 14 days!":"available for checkout in "+availDays+" days!";
+                System.out.println("id. " + id +" | "+"isbn"+"."+isbn+" | Title: "+ title +" | "+ available);
+
+
+        }
+
+
     }
 
     public static void printAllAvailableBooks(){
 
+        System.out.println("These are all the available books that you can checkout:");
+        for (int i=0;i<Books.length;i++){
+            if (Books[i].isCheckedOut() == false){
+                int id = Books[i].getId();
+                String isbn = Books[i].getIsbn();
+                String title = Books[i].getTitle();
+                String available= Books[i].getAvailableIn() == 0? "You can checkout this book for 14 days!":"not available for checkout yet!";
+                System.out.println("id. " + id +" | "+"isbn"+"."+isbn+" | Title: "+ title +" | "+ available);
+
+            }
+        }
     }
 
     public static void printOneBook(){
