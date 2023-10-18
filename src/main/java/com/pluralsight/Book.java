@@ -22,6 +22,7 @@ public class Book {
         this.availableIn = availableIn;
     }
 
+
     public int getId() {
         return id;
     }
@@ -70,20 +71,16 @@ public class Book {
         this.availableIn = borrowLimit;
     }
 
-    public void checkOut(String checkedOutTo){
-        if (isCheckedOut==true){
-            System.out.println("someone else has this book, cannot checkout");
-        }else{
-            this.checkedOutTo=checkedOutTo;
+    public void checkOut(String checkedOutTo) {
+            this.checkedOutTo = checkedOutTo;
             isCheckedOut = true;
-            System.out.println("you have checked out the book!");
-        }
+            availableIn = 14;
     }
 
-    public void checkIn(){
+    public void checkIn() {
         checkedOutTo = "";
         isCheckedOut = false;
-        System.out.println("you have successfully checked in this book");
+        availableIn = 0;
     }
 
     @Override
