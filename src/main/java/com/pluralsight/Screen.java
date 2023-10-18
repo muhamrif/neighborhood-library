@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Screen {
 
-    private static Book[] Books = new Book[20];
+    private static final Book[] Books = new Book[20];
     private static int BookInventory = 20;
 
     public static void main(String[] args) {
