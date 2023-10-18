@@ -10,63 +10,130 @@ public class Screen {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
+
         addInventory();
 
         System.out.println("Welcome to Muhamrif Library!");
         input.nextLine();
 
-        System.out.println("please select opt");
+        boolean loopFlag =true;
 
 
-        printAllBooks();
 
+
+        while(loopFlag){
+            mainScreenOptions();
+            String UserChoice = mainScreenUserSelection();
+            if(UserChoice.equalsIgnoreCase("E")) {
+                printAllBooks();
+                System.out.println("What Would you like to do next?");
+            }else if(UserChoice.equalsIgnoreCase("A")){
+                printAllAvailableBooks();
+            }else if(UserChoice.equalsIgnoreCase("N")){
+                printAllNonAvailableBooks();
+            }else if(UserChoice.equalsIgnoreCase("C")){
+                checkInBook(1);
+            }else if(UserChoice.equalsIgnoreCase("X")){
+                System.out.println("THANK YOU FOR VISITING MUHAMRIF LIBRARY! SEE YOU SOON : )");
+                loopFlag = !loopFlag;
+            }
+        }
 
 
     }
 
 
+
+    public static void mainScreenOptions(){
+        System.out.println("Please Select From The Following Options:");
+        System.out.println("Enter (E) to see our entire Books collection!");
+        System.out.println("Enter (A) to see Books that are Available for checkout!");
+        System.out.println("Enter (N) to see Books that are NOT Available for checkout!");
+        System.out.println("Enter (C) to CheckIn a Borrowed Book!");
+        System.out.println("Enter (X) to leave the Muhamrif Library!");
+
+    }
+
+    public static String mainScreenUserSelection(){
+
+        Scanner input= new Scanner(System.in);
+        String UserChoice = input.nextLine();
+        if(UserChoice.equalsIgnoreCase("E") || UserChoice.equalsIgnoreCase("A")|| UserChoice.equalsIgnoreCase("N")||
+                UserChoice.equalsIgnoreCase("C")||UserChoice.equalsIgnoreCase("X") ){
+          return UserChoice;
+        }else {
+            System.out.println("select good value");
+            mainScreenOptions();
+//            mainScreenUserSelection();
+        }
+        return mainScreenUserSelection();
+    };
 
     public static void printAllBooks(){
 
         System.out.println("These are all the books in Muhamrif Library:");
-        for (int i=0;i<Books.length;i++){
-                int id = Books[i].getId();
-                String isbn = Books[i].getIsbn();
-                String title = Books[i].getTitle();
-                int availDays = Books[i].getAvailableIn();
-                String available= Books[i].getAvailableIn() == 0? "You can checkout this book for 14 days!":"available for checkout in "+availDays+" days!";
-                System.out.println("id. " + id +" | "+"isbn"+"."+isbn+" | Title: "+ title +" | "+ available);
-
+        for (Book book : Books) {
+            int id = book.getId();
+            String isbn = book.getIsbn();
+            String title = book.getTitle();
+            int availDays = book.getAvailableIn();
+            String available = book.getAvailableIn() == 0 ? "You can checkout this book for 14 days!" : "available for checkout in " + availDays + " days!";
+            System.out.println("id. " + id + " | " + "isbn" + "." + isbn + " | Title: " + title + " | " + available);
 
         }
+        Scanner input = new Scanner(System.in);
+        input.nextLine();
 
 
     }
+
+
 
     public static void printAllAvailableBooks(){
 
         System.out.println("These are all the available books that you can checkout:");
+        for (Book book : Books) {
+            if (!book.isCheckedOut()) {
+                int id = book.getId();
+                String isbn = book.getIsbn();
+                String title = book.getTitle();
+                String available = book.getAvailableIn() == 0 ? "You can checkout this book for 14 days!" : "not available for checkout yet! Will be Available in " + book.getAvailableIn() + "days!";
+                System.out.println("id. " + id + " | " + "isbn" + "." + isbn + " | Title: " + title + " | " + available);
+
+            }
+        }
+        Scanner input = new Scanner(System.in);
+        input.nextLine();
+    }
+
+
+    public static void printAllNonAvailableBooks(){
+
+        System.out.println("These are all the available books that you can checkout:");
         for (int i=0;i<Books.length;i++){
-            if (Books[i].isCheckedOut() == false){
+            if (Books[i].isCheckedOut()){
                 int id = Books[i].getId();
                 String isbn = Books[i].getIsbn();
                 String title = Books[i].getTitle();
-                String available= Books[i].getAvailableIn() == 0? "You can checkout this book for 14 days!":"not available for checkout yet!";
+                String available= Books[i].getAvailableIn() == 0? "You can checkout this book for 14 days!":"not available for checkout yet, it will be available in " + Books[i].getAvailableIn() +" days!";
                 System.out.println("id. " + id +" | "+"isbn"+"."+isbn+" | Title: "+ title +" | "+ available);
 
             }
         }
-    }
-
-    public static void printOneBook(){
-
-    }
-
-    public static void checkOutBook(){
+        Scanner input = new Scanner(System.in);
+        input.nextLine();
 
     }
 
-    public static void checkInBook(){
+    public static void printOneBook(int id){
+
+    }
+
+    public static void checkOutBook(int id){
+
+    }
+
+    public static void checkInBook(int id){
 
     }
 
